@@ -8,19 +8,25 @@ document.getElementById("submit").addEventListener("click",(e)=>{
     let elementEmail = email.value;
 
     let userInfo = {
-        nameUser:elementName,
-        emailUser:elementEmail,
-        passwordUser:elementPassword,
+        name:elementName,
+        email:elementEmail,
+        password:elementPassword,
     }
-    console.log(userInfo);
-    fetch("/register",{
-
-        method:"post",
-        headers:{
-            "Content-Type": "application/json",
+    
+    
+    fetch('http://localhost:8080/register', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
         },
-        body:JSON.stringify(userInfo),
-    }).then(async result =>{
-
+        body: JSON.stringify(userInfo)
     })
+    .then(response => response.json())
+    .then(data => {
+        console.log('Réponse du serveur:', data);
+    })
+    .catch(error => {
+        console.error('Erreur lors de la requête:', error);
+    });
+
 })

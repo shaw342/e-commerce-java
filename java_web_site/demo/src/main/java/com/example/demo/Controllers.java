@@ -9,8 +9,13 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+
+import java.net.URI;
+
 import org.attoparser.dom.Document;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+
 
 
 @Controller
@@ -24,13 +29,9 @@ public class Controllers {
     public String login(){
         return "login";
     }
-    @RequestMapping(path = "/register",method = RequestMethod.GET,consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE},
-    produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
-    public ResponseEntity<User> register(@RequestBody User user){
-        User pUser = Database.addData(user);
-
+    @PostMapping("/register")
+    public String register(@RequestBody User user){
+        Database.addData(user);
+        return "login";
     }
-
-
-
 }
