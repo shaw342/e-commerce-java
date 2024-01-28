@@ -13,6 +13,8 @@ import com.mongodb.client.MongoDatabase;
 
 public class Database {
      public static MongoClientSettings connectDatabase(){
+
+        
         String url = System.getProperty("MONGODB_URI");
         ServerApi serverApi = ServerApi.builder()
         .version(ServerApiVersion.V1)
