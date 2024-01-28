@@ -19,11 +19,20 @@ form{
     background-color: aliceblue;
     border: 0.5rem;
     display: flex;
-    align-content: center;
-    justify-content: center;
     flex-direction: column;
+    justify-content: center;
 }
 input{
     width: 200px;
     height: 40px;
+    margin-left: 100px;
+}
+label{
+    
+    width: 200px;
+    height: 40px;
+    margin-left: 150px;
+}
+#submit{
+    margin-top: 30px;
 }

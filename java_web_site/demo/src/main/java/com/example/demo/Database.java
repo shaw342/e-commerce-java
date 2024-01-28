@@ -13,8 +13,8 @@ import com.mongodb.client.MongoDatabase;
 
 public class Database {
      public static MongoClientSettings connectDatabase(){
-        String url = "mongodb+srv://shawan:wlOhnb4CT0xNIfoN@cluster0.uv2wfdv.mongodb.net/?retryWrites=true&w=majority";
-
+        /*String url = "mongodb+srv://shawan:wlOhnb4CT0xNIfoN@cluster0.uv2wfdv.mongodb.net/?retryWrites=true&w=majority";*/
+        String url = System.getProperty("MONGODB_URI");
         ServerApi serverApi = ServerApi.builder()
         .version(ServerApiVersion.V1)
         .build();
@@ -44,6 +44,7 @@ public class Database {
                 System.err.println(me);
             }
         }
+        
      }
 
 }
