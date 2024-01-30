@@ -1,8 +1,6 @@
 package com.example.demo;
 import com.mongodb.*;
 
-import javax.print.Doc;
-
 import org.bson.BsonDocument;
 import org.bson.BsonInt64;
 import org.bson.Document;
@@ -12,10 +10,9 @@ import com.mongodb.client.MongoClients;
 import com.mongodb.client.MongoDatabase;
 
 public class Database {
-     public static MongoClientSettings connectDatabase(){
-
+      public static MongoClientSettings connectDatabase(){
         
-        String url = System.getProperty("MONGODB_URI");
+        String url = System.getenv("MON_API_KEY");
         ServerApi serverApi = ServerApi.builder()
         .version(ServerApiVersion.V1)
         .build();
@@ -36,10 +33,10 @@ public class Database {
         MongoClientSettings settings = connectDatabase();
         System.out.println(data);
         try (MongoClient mongoClient = MongoClients.create(settings)) {
-            MongoDatabase database = mongoClient.getDatabase("shawan");
+            MongoDatabase database = mongoClient.getDatabase("e-commerce-data");
             try {
                 //Document commandResult = database.runCommand(command);
-                database.getCollection("student").insertOne(newData);
+                database.getCollection("Customers").insertOne(newData);
                 System.out.println("Pinged your deployment. You successfully connected to MongoDB!");
             } catch (MongoException me) {
                 System.err.println(me);
@@ -47,5 +44,6 @@ public class Database {
         }
         
      }
+    
 
 }
