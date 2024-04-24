@@ -1,37 +1,39 @@
 package com.example.demo;
 
-
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-
 import org.springframework.data.mongodb.core.mapping.Document;
 
 @Document
 public class User {
     private String name;
-    private String password;
+    private char[] password;
     private String email;
+
+    User (String name,String email,char[] password){
+        this.name = name;
+        this.email = email;
+        this.password = password;
+
+    }
 
     public String getName(){
         return name;
     }
-    private void setName(String name){
+
+    public void setName(String name){
         this.name = name;
     }
 
-    public String getPassword(){
+    public char[] getPassword(){
         return password;
     }
-
-    private void setPassword(String password){
-        this.password = password;
+    public void setPassword(char[] password){
+        this.password= password;
     }
-
     public String getEmail(){
         return email;
     }
-    private void setEmail(String email){
+
+    public void setEmail(String email){
         this.email = email;
     }
 }

@@ -5,9 +5,13 @@ import org.bson.BsonDocument;
 import org.bson.BsonInt64;
 import org.bson.Document;
 import org.bson.conversions.Bson;
+import org.springframework.boot.autoconfigure.ldap.embedded.EmbeddedLdapProperties.Credential;
+
 import com.mongodb.client.MongoClient;
 import com.mongodb.client.MongoClients;
 import com.mongodb.client.MongoDatabase;
+
+import io.micrometer.observation.transport.Propagator.Setter;
 
 public class Database {
       public static MongoClientSettings connectDatabase(){
@@ -23,7 +27,7 @@ public class Database {
         return settings;
      }
 
-     public static void addData(User data){
+     public static void addCustomers(User data){
         
         Document newData = new Document();
         newData.append("name", data.getName());
@@ -42,8 +46,23 @@ public class Database {
                 System.err.println(me);
             }
         }
-        
      }
-    
+     public static void createCredentials(User data){
+        Document newData = new Document();
+        MongoClientSettings settings = connectDatabase();
+       try (MongoClient mongoClient = MongoClients.create(settings)){
+        MongoDatabase database = mongoClient.getDatabase("e-commerce-data");
+        try {
+            MongoCredential credential = MongoCredential.createCredential(data.getName(),"e-commerce-data", data.getPassword());
+            System.out.println("##########\n"+ credential.getMechanism()+"##########\n");
+        } catch (Exception e) {
+            // TODO: handle exception
+            
+        }
+       } catch (Exception e) {
+        // TODO: handle exception
+       }
+
+     }
 
 }
